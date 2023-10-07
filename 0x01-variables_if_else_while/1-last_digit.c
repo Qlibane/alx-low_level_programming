@@ -4,9 +4,9 @@
 #include<stdio.h>
 /* betty style doc for function main goes there */
 /**
- * main - main funxtion
+ * main - main function
  *
- * Return: always 0
+ * Return: always 0 (success)
  */
 int main(void)
 {
@@ -18,11 +18,11 @@ int main(void)
 	/* your code goes there */
 	m = n % 10;
 	if (m > 5)
-		printf("last digit of %d is  %d and is greater than", n, m);
+		printf("last digit of %d is %d and is greater than 5", n, m);
 	else if (m == 0)
 		printf("last digit of %d is %d and is equal to zero", n, m);
-	else if (m < 0 && m != 0)
-		printf("last digit of %d is %d and is less than 6 and not 0", n, m);
+	else if (m < 6 && m != 0)
+		printf("last digit of %d is %d and is greater than 6 and is not zero", n, m);
 	printf("\n");
 	return (0);
 }
