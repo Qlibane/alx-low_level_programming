@@ -4,7 +4,7 @@
  *
  * @s: pointer to the string
  *
- * Return: pointer to s
+ * Return: Pointer to s
  */
 char *cap_string(char *s)
 {
