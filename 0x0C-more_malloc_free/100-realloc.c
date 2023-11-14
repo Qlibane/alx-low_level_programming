@@ -1,43 +1,51 @@
-#include "main.h"
 #include <stdlib.h>
+#include "main.h"
+#include <stdio.h>
 /**
- * *_realloc - allocates memory block block using malloc and free
- *
- * @ptr: pointer to memory
- *
- * @old_size: size in bytes of the allocated space
- *
- * @new_size: size in bytes of the new memory block
- *
- * Return: NULL if new_size is equal to 0 and ptr is not NULL
+ * _realloc - reallocates a memory block using malloc and free
+ * @ptr: pointer to the memory previously allocated with a call
+ * to malloc i.e. malloc(old_size)
+ * @old_size: the size of the allocated space for ptr
+ * @new_size: the new size of the new memory block
+ * Return: if new_size > old_size, added memory should not be initialised
+ * if new_size == old_size, return ptr
+ * if ptr is NULL call == malloc(new_size) for all values of old and new size
+ * if new_size=0 && ptr != NULL, call = free(ptr) and Return NULL
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-        void *p;
-        unsigned int i;
+	char *ptr1, *old_ptr;
+	unsigned int i;
 
-        if (new_size == old_size)
-                return (ptr);
-        if (new_size = 0 && ptr != NULL)
-        {
-                free(ptr);
-                return (NULL);
-        }
-        if (ptr == NULL)
-        {
-                p = malloc(new_size);
-                if (p == NULL)
-                        return (NULL);
-                return (p);
-        }
-        if (new_size > old_size)
-        {
-                p = malloc(new_size);
-                if (p == NULL)
-                        return (NULL);
-                for (i = 0; i < old_size && i < new_size; i++)
-                        *((char *)p + 1) = *((char *)ptr + 1);
-                free(ptr);
-        }
-        return (p);
+	if (new_size == old_size)
+		return (ptr);
+
+	if (new_size == 0 && ptr != NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+
+	if (ptr == NULL)
+		return (malloc(new_size));
+	ptr1 = malloc(new_size);
+
+	if (!ptr1)
+		return (NULL);
+
+	old_ptr = ptr;
+
+	if (new_size < old_size)
+	{
+		for (i = 0; i < new_size; i++)
+			ptr1[i] = old_ptr[i];
+	}
+
+	if (new_size > old_size)
+	{
+		for (i = 0; i < old_size; i++)
+			ptr1[i] = old_ptr[i];
+	}
+	free(ptr);
+	return (ptr1);
 }
